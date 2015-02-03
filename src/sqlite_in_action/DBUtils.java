@@ -6,6 +6,8 @@
 package sqlite_in_action;
 
 import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,10 +25,16 @@ public class DBUtils {
     {
         try
         {
+            // instance the driver from SQLiteJDBC_Connector
             Driver driver = (Driver) Class.forName("org.sqlite.JDBC").newInstance();
-            String 
+            //determinate URL variable for a SQLiteJDBC_Connector
+            String url="jdbc:sqlite:"+connection_path;
             
-            
+            //trying connection
+            if (con==null) {
+                DriverManager.getConnection(url);
+            }
+           
         }
         catch(SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex)
         {
